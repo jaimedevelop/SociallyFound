@@ -6,3 +6,7 @@ export { CampaignCard } from './CampaignCard';
 export { CampaignTabs } from './CampaignTabs';
 export { InfluencerCampaigns } from './InfluencerCampaigns';
 export { BrandCampaigns } from './BrandCampaigns';
+
+// Updated campaign creation components
+export { CreateCampaignButton } from './CreateCampaignButton';
+export { CreateCampaignModal } from './creationModal';

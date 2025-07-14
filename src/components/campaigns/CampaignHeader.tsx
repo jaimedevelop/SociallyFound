@@ -1,6 +1,36 @@
 // components/campaigns/CampaignHeader.tsx
 import React from 'react';
-import { Search, Plus } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { CreateCampaignButton } from './index';
+
+interface Campaign {
+  id: number;
+  type?: 'quick' | 'advanced';
+  title: string;
+  status: string;
+  applications: number;
+  budget: string;
+  deadline: string;
+  category: string;
+  description: string;
+  hired: number;
+  pending: number;
+  views: number;
+  createdAt: string;
+  campaignType?: string;
+  priority?: string;
+  contentRequirements?: {
+    instagram: { posts: number; stories: number; reels: number };
+    youtube: { videos: number; shorts: number; community: number };
+  };
+  influencerCount?: number;
+  duration?: string;
+  targetAudience?: {
+    followerRange: string;
+    locations: string[];
+    demographics: string[];
+  };
+}
 
 interface CampaignHeaderProps {
   searchTerm: string;
@@ -8,6 +38,7 @@ interface CampaignHeaderProps {
   isInfluencer: boolean;
   title?: string;
   subtitle?: string;
+  onCampaignCreated?: (campaign: Campaign) => void;
 }
 
 export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
@@ -15,7 +46,8 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
   onSearchChange,
   isInfluencer,
   title,
-  subtitle
+  subtitle,
+  onCampaignCreated
 }) => {
   const defaultTitle = isInfluencer ? "Available Campaigns" : "Campaign Management";
   const defaultSubtitle = isInfluencer 
@@ -37,10 +69,9 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
             )}
           </div>
           {!isInfluencer && (
-            <button className="bg-indigo-600 text-white px-4 md:px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center">
-              <Plus className="w-5 h-5 mr-2" />
-              Create Campaign
-            </button>
+            <CreateCampaignButton 
+              onCampaignCreated={onCampaignCreated}
+            />
           )}
         </div>
         
